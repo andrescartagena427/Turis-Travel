@@ -1,0 +1,42 @@
+﻿@model List<Turis_Travel.Models.Permiso>
+
+@{
+    ViewData["Title"] = "Gestión de Permisos";
+}
+
+<h2 class="text-center mt-4">Gestión de Permisos</h2>
+
+<a href="/Permiso/Crear" class="btn btn-success mb-3">➕ Nuevo Permiso</a>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Rol</th>
+            <th>Módulo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <tr><td colspan="5">No hay permisos</td></tr>
+        }
+        else
+        {
+            foreach (var permiso in Model)
+            {
+                <tr>
+                    <td>@permiso.ID_permiso</td>
+                    <td>@permiso.Nombre_rol</td>
+                    <td>@permiso.Nombre_modulo</td>
+                    <td>@(permiso.Estado_permiso == 1 ? "Activo" : "Inactivo")</td>
+                    <td>
+                        <a href="/Permiso/Eliminar/@permiso.ID_permiso" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

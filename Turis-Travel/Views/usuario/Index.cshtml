@@ -1,0 +1,238 @@
+﻿@model IEnumerable<Turismo_Viajes.Models.Usuario>
+@{
+    ViewData["Title"] = "Gestión de Usuarios";
+}
+
+<!-- 🔹 Estilos elegantes -->
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    /* Header principal */
+    .header-gradient {
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
+        color: white;
+        text-align: center;
+        padding: 2.5rem 1rem;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+        .header-gradient h1 {
+            font-weight: 700;
+            font-size: 2.3rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .header-gradient p {
+            font-size: 1rem;
+            color: #f1f1f1;
+        }
+
+    /* Tarjeta general */
+    .card-panel {
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        margin-top: -50px;
+    }
+
+    /* Resumen superior */
+    .stats-box {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1rem;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+        .stats-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-box h3 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #4a00e0;
+        }
+
+        .stats-box p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+   
+    .table thead {
+        background: #4a00e0;
+        color: white;
+    }
+
+    .table tbody tr {
+        background: #fff;
+        transition: 0.3s ease;
+    }
+
+        .table tbody tr:hover {
+            background: #f1f3ff;
+            transform: scale(1.005);
+        }
+
+    .badge {
+        border-radius: 8px;
+        padding: 0.5em 0.9em;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .badge-success {
+        background-color: #4caf50;
+    }
+
+    .badge-danger {
+        background-color: #e53935;
+    }
+
+    /* Botones */
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+    .btn-success {
+        background: linear-gradient(90deg, #43a047, #66bb6a);
+        border: none;
+    }
+
+    .btn-warning {
+        background: linear-gradient(90deg, #ffb300, #ffca28);
+        border: none;
+        color: #000;
+    }
+
+    .btn-danger {
+        background: linear-gradient(90deg, #e53935, #ef5350);
+        border: none;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-add {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.7rem 1.2rem;
+        border-radius: 12px;
+    }
+
+        .btn-add:hover {
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 4px 12px rgba(142, 45, 226, 0.4);
+        }
+</style>
+
+<!-- 🔹 Encabezado -->
+<div class="header-gradient">
+    <h1><i class="bi bi-people-fill"></i> Gestión de Usuarios</h1>
+    <p>Administra los usuarios del sistema Turis_Travel</p>
+</div>
+
+<div class="container my-5">
+    <div class="card-panel">
+
+        <!-- 🔹 Resumen estadístico -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@Model.Count()</h3>
+                    <p>Total Usuarios</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@Model.Count(u => u.Activo)</h3>
+                    <p>Usuarios Activos</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@Model.Count(u => !u.Activo)</h3>
+                    <p>Usuarios Inactivos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔹 Botón agregar -->
+        <div class="d-flex justify-content-end mb-3">
+            <a href="@Url.Action("Create", "Usuario")" class="btn btn-add">
+                <i class="bi bi-person-plus-fill"></i> Nuevo Usuario
+            </a>
+        </div>
+
+        <!-- 🔹 Tabla de usuarios -->
+        <div class="table-responsive">
+            <table class="table table-hover text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td>@usuario.Id</td>
+                                <td>@usuario.Nombre</td>
+                                <td>@usuario.Correo</td>
+                                <td>@usuario.Rol</td>
+                                <td>
+                                    @if (usuario.Activo)
+                                    {
+                                        <span class="badge badge-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Usuario", new { id = usuario.Id })" class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Usuario", new { id = usuario.Id })" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-muted">No hay usuarios registrados</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
