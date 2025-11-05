@@ -1,0 +1,23 @@
+﻿@model Turis_Travel.Models.Rol
+@{
+    ViewData["Title"] = "Editar Rol";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Editar Rol</h2>
+    <form asp-action="Edit" method="post" class="mx-auto" style="max-width: 500px;">
+        <input type="hidden" asp-for="ID_rol" />
+        <div class="form-group mb-3">
+            <label>Nombre del Rol</label>
+            <input asp-for="Nombre_rol" class="form-control" required />
+        </div>
+        <div class="form-group mb-3">
+            <label>Estado del Rol</label>
+            <input asp-for="Estado_rol" type="number" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+

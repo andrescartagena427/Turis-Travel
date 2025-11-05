@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Gestión de Permisos";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #e9ecf2, #f3f4f7);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        margin-top: 80px;
+    }
+
+    h2 {
+        color: #0077b6;
+        font-weight: 600;
+    }
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 30px;
+    }
+
+    .btn-back {
+        background-color: #0077b6;
+        color: white;
+        border-radius: 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+        .btn-back:hover {
+            background-color: #023e8a;
+        }
+</style>
+
+<div class="container">
+    <div class="card text-center">
+        <h2>Gestión de Permisos</h2>
+        <p>Aquí podrás visualizar y administrar los permisos por rol y módulo.</p>
+
+        <div class="mt-4">
+            <a asp-controller="Rol" asp-action="Index" class="btn-back">
+                ← Volver a Roles
+            </a>
+        </div>
+    </div>
+</div>

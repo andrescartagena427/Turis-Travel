@@ -1,0 +1,206 @@
+﻿@model IEnumerable<Turis_Travel.Models.Rol>
+@{
+    ViewData["Title"] = "Gestión de Roles";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<!-- Estilos (mismo estilo que Gestión de Usuarios) -->
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
+        color: white;
+        text-align: center;
+        padding: 2.5rem 1rem;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-panel {
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        margin-top: -50px;
+    }
+
+    .stats-box {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1rem;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+        .stats-box h3 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #4a00e0;
+        }
+
+        .stats-box p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+    .table thead {
+        background: #4a00e0;
+        color: white;
+    }
+
+    .table tbody tr {
+        background: #fff;
+        transition: 0.3s ease;
+    }
+
+        .table tbody tr:hover {
+            background: #f1f3ff;
+            transform: scale(1.005);
+        }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+    .btn-add {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.7rem 1.2rem;
+        border-radius: 12px;
+    }
+
+        .btn-add:hover {
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 4px 12px rgba(142, 45, 226, 0.4);
+        }
+
+    .btn-warning {
+        background: linear-gradient(90deg, #ffb300, #ffca28);
+        border: none;
+        color: #000;
+    }
+
+    .btn-danger {
+        background: linear-gradient(90deg, #e53935, #ef5350);
+        border: none;
+        color: white;
+    }
+
+    .badge-activo {
+        background-color: #28a745;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .badge-inactivo {
+        background-color: #dc3545;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.3rem 0.7rem;
+    }
+</style>
+
+<div class="header-gradient">
+    <h1><i class="bi bi-people-fill"></i> Gestión de Roles</h1>
+    <p>Administra los roles del sistema Turis_Travel</p>
+</div>
+
+<div class="container my-5">
+    <div class="card-panel">
+
+        <!-- Resumen superior -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count() ?? 0)</h3>
+                    <p>Total Roles</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count(r => r.Estado_rol == 1) ?? 0)</h3>
+                    <p>Roles Activos</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count(r => r.Estado_rol == 0) ?? 0)</h3>
+                    <p>Roles Inactivos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón agregar -->
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-controller="Rol" asp-action="Create" class="btn btn-add">
+                <i class="bi bi-plus-circle-fill"></i> Nuevo Rol
+            </a>
+        </div>
+
+        <!-- Tabla de roles -->
+        <div class="table-responsive">
+            <table class="table table-hover text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var rol in Model)
+                        {
+                            <tr>
+                                <td>@rol.ID_rol</td>
+                                <td>@rol.Nombre_rol</td>
+                                <td>
+                                    @if (rol.Estado_rol == 1)
+                                    {
+                                        <span class="badge-activo">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-inactivo">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@rol.ID_rol" class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@rol.ID_rol" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-muted">No hay roles registrados</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

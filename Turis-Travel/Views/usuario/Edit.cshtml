@@ -1,39 +1,176 @@
 ﻿@model Turismo_Viajes.Models.Usuario
 
 @{
-    ViewData["Title"] = "Editar Usuario";
+    ViewData["titule"] = "Editar Usuario";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Editar Usuario</h2>
+<style>
+    body {
+        background: linear-gradient(135deg, #f3f4f7, #e9ecf2);
+        font-family: 'Poppins', sans-serif;
+    }
 
-    <form asp-action="Edit" method="post" class="card p-4 shadow-sm">
-        <input type="hidden" asp-for="Id" />
+    .form-container {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        margin: 3rem auto;
+        max-width: 650px;
+        transition: all 0.3s ease;
+    }
 
-        <div class="mb-3">
-            <label asp-for="Nombre" class="form-label">Nombre</label>
-            <input asp-for="Nombre" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Correo" class="form-label">Correo</label>
-            <input asp-for="Correo" type="email" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Rol" class="form-label">Rol</label>
-            <select asp-for="Rol" class="form-select">
-                <option value="Administrador">Administrador</option>
-                <option value="Empleado">Empleado</option>
-                <option value="Cliente">Cliente</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Activo</label>
-            <input asp-for="Activo" type="checkbox" class="form-check-input ms-2" />
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+    h2 {
+        text-align: center;
+        font-weight: 700;
+        color: #4a00e0;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+        h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a00e0, #8e2de2);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+    label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    input, select {
+        border-radius: 10px !important;
+        border: 1px solid #ccc;
+        padding: 0.75rem 1rem;
+        transition: 0.2s ease;
+    }
+
+        input:focus, select:focus {
+            border-color: #8e2de2;
+            box-shadow: 0 0 6px rgba(142, 45, 226, 0.3);
+        }
+
+    /* --- Ajuste del checkbox “Activo” --- */
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+    }
+
+    .form-check-label {
+        font-weight: 500;
+        color: #333;
+        margin: 0;
+    }
+
+    /* Botones */
+    .btn-primary {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        border: none;
+        border-radius: 10px;
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        border-radius: 10px;
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+    .icon-header {
+        font-size: 3rem;
+        color: #8e2de2;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <div class="icon-header">
+            <i class="bi bi-person-lines-fill"></i>
         </div>
 
-        <button type="submit" class="btn btn-primary">
-            <i class="bi bi-pencil"></i> Guardar Cambios
-        </button>
-        <a asp-action="Index" class="btn btn-secondary ms-2">Volver</a>
-    </form>
+        <h2>Editar Usuario</h2>
+
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre completo" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo</label>
+                <input asp-for="Correo" type="email" class="form-control" placeholder="usuario@correo.com" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Rol" class="form-label">Rol</label>
+                <select asp-for="Rol" class="form-select">
+                    <option value="">Seleccione un rol</option>
+                    <option>Administrador</option>
+                    <option>Empleado</option>
+                    <option>Cliente</option>
+                </select>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="Activo" class="form-check-input" type="checkbox" id="activoCheck" />
+                <label class="form-check-label" for="activoCheck">Activo</label>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Guardar Cambios
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

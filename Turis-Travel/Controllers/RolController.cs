@@ -1,83 +1,90 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using Turis_Travel.Models;
 using System.Collections.Generic;
+using System.Linq;
+using Turis_Travel.Models;
 
 namespace Turis_Travel.Controllers
 {
     public class RolController : Controller
     {
-        private readonly ConexionBD conexion = new ConexionBD();
+        // Simulación de datos (puedes reemplazar por base de datos más adelante)
+        private static List<Rol> roles = new List<Rol>
+        {
+            new Rol { ID_rol = 1, Nombre_rol = "Administrador", Estado_rol = 1 },
+            new Rol { ID_rol = 2, Nombre_rol = "Empleado", Estado_rol = 1 },
+            new Rol { ID_rol = 3, Nombre_rol = "Cliente", Estado_rol = 0 }
+        };
 
-        // Mostrar lista de roles
         public IActionResult Index()
         {
-            List<Rol> roles = new List<Rol>();
-            using (var con = conexion.GetConnection())
-            {
-                con.Open();
-                string query = "SELECT ID_rol, Nombre_rol, Estado_rol FROM Roles";
-                using (var cmd = new MySqlCommand(query, con))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            roles.Add(new Rol
-                            {
-                                ID_rol = reader.GetInt32("ID_rol"),
-                                Nombre_rol = reader.GetString("Nombre_rol"),
-                                Estado_rol = reader.GetInt32("Estado_rol")
-                            });
-                        }
-                    }
-                }
-            }
             return View(roles);
         }
 
-        // Crear nuevo rol (GET)
-        public IActionResult Crear()
+        // ======================
+        // CREAR NUEVO ROL
+        // ======================
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // Crear nuevo rol (POST)
         [HttpPost]
-        public IActionResult Crear(Rol rol)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Rol nuevoRol)
         {
             if (ModelState.IsValid)
             {
-                using (var con = conexion.GetConnection())
-                {
-                    con.Open();
-                    string query = "INSERT INTO Roles (Nombre_rol, Estado_rol) VALUES (@nombre, @estado)";
-                    using (var cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", rol.Nombre_rol);
-                        cmd.Parameters.AddWithValue("@estado", rol.Estado_rol);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                return RedirectToAction("Index");
+                // Simular autoincremento
+                int nuevoId = roles.Any() ? roles.Max(r => r.ID_rol) + 1 : 1;
+                nuevoRol.ID_rol = nuevoId;
+                roles.Add(nuevoRol);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(nuevoRol);
+        }
+
+        // ======================
+        // EDITAR ROL EXISTENTE
+        // ======================
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var rol = roles.FirstOrDefault(r => r.ID_rol == id);
+            if (rol == null)
+            {
+                return NotFound();
             }
             return View(rol);
         }
 
-        // Eliminar rol
-        public IActionResult Eliminar(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Rol rolEditado)
         {
-            using (var con = conexion.GetConnection())
+            var rol = roles.FirstOrDefault(r => r.ID_rol == rolEditado.ID_rol);
+            if (rol == null)
             {
-                con.Open();
-                string query = "DELETE FROM Roles WHERE ID_rol = @id";
-                using (var cmd = new MySqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
+                return NotFound();
             }
-            return RedirectToAction("Index");
+
+            rol.Nombre_rol = rolEditado.Nombre_rol;
+            rol.Estado_rol = rolEditado.Estado_rol;
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // ======================
+        // ELIMINAR ROL
+        // ======================
+        public IActionResult Delete(int id)
+        {
+            var rol = roles.FirstOrDefault(r => r.ID_rol == id);
+            if (rol != null)
+            {
+                roles.Remove(rol);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

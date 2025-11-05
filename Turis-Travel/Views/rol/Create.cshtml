@@ -1,0 +1,135 @@
+﻿@model Turis_Travel.Models.Rol
+
+@{
+    ViewData["Title"] = "Registrar Nuevo Rol";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f3f4f7, #e9ecf2);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
+        color: white;
+        text-align: center;
+        padding: 2.5rem 1rem;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+        .header-gradient h1 {
+            font-weight: 700;
+            font-size: 2.3rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .header-gradient p {
+            font-size: 1rem;
+            color: #f1f1f1;
+        }
+
+    .form-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        margin-top: -50px;
+        transition: 0.3s ease;
+    }
+
+        .form-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+        }
+
+    label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #8e2de2;
+            box-shadow: 0 0 5px rgba(142, 45, 226, 0.3);
+        }
+
+    .btn-save {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        padding: 0.7rem 1.5rem;
+        transition: 0.3s ease;
+    }
+
+        .btn-save:hover {
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 4px 10px rgba(142, 45, 226, 0.4);
+        }
+
+    .btn-cancel {
+        background: #f3f3f3;
+        color: #333;
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 0.7rem 1.5rem;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        transition: 0.3s ease;
+    }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+<div class="header-gradient">
+    <h1><i class="bi bi-person-badge-fill"></i> Registrar Nuevo Rol</h1>
+    <p>Agrega un nuevo rol al sistema Turis_Travel</p>
+</div>
+
+<div class="container my-5">
+    <div class="form-card mx-auto" style="max-width: 550px;">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label for="Nombre_rol" class="form-label">Nombre del Rol</label>
+                <input asp-for="Nombre_rol" class="form-control" placeholder="Ej: Administrador" required />
+                <span asp-validation-for="Nombre_rol" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="Estado_rol" class="form-label">Estado del Rol</label>
+                <select asp-for="Estado_rol" class="form-control">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <span asp-validation-for="Estado_rol" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn-save">
+                    <i class="bi bi-check-circle-fill"></i> Guardar
+                </button>
+                <a asp-action="Index" class="btn-cancel">
+                    <i class="bi bi-x-circle-fill"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
