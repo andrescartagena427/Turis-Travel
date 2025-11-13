@@ -1,0 +1,83 @@
+﻿@model Turis_Travel.Models.Permiso
+@{
+    ViewData["Title"] = "Nuevo Permiso";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-container {
+        background: #fff;
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-top: -50px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-save {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        border: none;
+        color: white;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 0.6rem 1.2rem;
+        transition: 0.3s ease;
+    }
+
+        .btn-save:hover {
+            background: linear-gradient(90deg, #8e2de2, #4a00e0);
+            box-shadow: 0 4px 12px rgba(142, 45, 226, 0.4);
+        }
+</style>
+
+<div class="header-gradient">
+    <h1><i class="bi bi-shield-plus"></i> Nuevo Permiso</h1>
+    <p>Agrega un nuevo permiso al sistema</p>
+</div>
+
+<div class="form-container">
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label class="form-label">Rol</label>
+            <input asp-for="ID_rol" class="form-control" placeholder="ID del Rol" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Módulo</label>
+            <input asp-for="ID_modulo" class="form-control" placeholder="ID del Módulo" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <select asp-for="Estado_permiso" class="form-control">
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-save">
+            <i class="bi bi-check-circle-fill"></i> Guardar Permiso
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+    
+
+</div>

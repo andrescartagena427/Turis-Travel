@@ -1,51 +1,206 @@
-﻿@{
+﻿@model IEnumerable<Turis_Travel.Models.Permiso>
+
+@{
     ViewData["Title"] = "Gestión de Permisos";
+    Layout = "~/Views/Shared/Index2.cshtml";
 }
 
 <style>
     body {
-        background: linear-gradient(135deg, #e9ecf2, #f3f4f7);
+        background-color: #f4f6f9;
         font-family: 'Poppins', sans-serif;
+        color: #333;
     }
 
-    .container {
-        margin-top: 80px;
-    }
-
-    h2 {
-        color: #0077b6;
-        font-weight: 600;
-    }
-
-    .card {
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        padding: 30px;
-    }
-
-    .btn-back {
-        background-color: #0077b6;
+    .header-gradient {
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
         color: white;
-        border-radius: 10px;
-        padding: 10px 20px;
-        text-decoration: none;
+        text-align: center;
+        padding: 2.5rem 1rem;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
-        .btn-back:hover {
-            background-color: #023e8a;
-        }
+    .card-panel {
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        margin-top: -50px;
+    }
+
+    .stats-box {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1rem;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .stats-box h3 {
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #4a00e0;
+    }
+
+    .stats-box p {
+        color: #6c757d;
+            margin: 0;
+    }
+
+    .table thead {
+        background: #4a00e0;
+        color: white;
+    }
+
+    .table tbody tr {
+        background: #fff;
+        transition: 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+        background: #f1f3ff;
+        transform: scale(1.005);
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+    .btn-add {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.7rem 1.2rem;
+        border-radius: 12px;
+    }
+
+    .btn:hover {
+        background: linear-gradient(90deg, #8e2de2, #4a00e0);
+        box-shadow: 0 4px 12px rgba(142, 45, 226, 0.4);
+    }
+
+    .btn-warning {
+        background: linear-gradient(90deg, #ffb300, #ffca28);
+        border: none;
+        color: #000;
+    }
+
+    .btn-danger {
+        background: linear-gradient(90deg, #e53935, #ef5350);
+        border: none;
+        color: white;
+    }
+
+    .badge-activo {
+        background-color: #28a745;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .badge-inactivo {
+        background-color: #dc3545;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.3rem 0.7rem;
+    }
 </style>
 
-<div class="container">
-    <div class="card text-center">
-        <h2>Gestión de Permisos</h2>
-        <p>Aquí podrás visualizar y administrar los permisos por rol y módulo.</p>
+<div class="header-gradient mb-5">
+    <h1><i class="bi bi-shield-lock-fill"></i> Gestión de Permisos</h1>
+    <p class="lead">Administra los permisos asociados a los roles del sistema</p>
+</div>
 
-        <div class="mt-4">
-            <a asp-controller="Rol" asp-action="Index" class="btn-back">
-                ← Volver a Roles
+<div class="container my-5">
+    <div class="card-panel">
+
+        <!-- Resumen superior -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count() ?? 0)</h3>
+                    <p>Total Permisos</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count(p => p.Estado_permiso == 1) ?? 0)</h3>
+                    <p>Permisos Activos</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-box">
+                    <h3>@(Model?.Count(p => p.Estado_permiso == 0) ?? 0)</h3>
+                    <p>Permisos Inactivos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón agregar -->
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-controller="Permiso" asp-action="Create" class="btn btn-add">
+                <i class="bi bi-plus-circle-fill"></i> Nuevo Permiso
             </a>
         </div>
+
+        <!-- Tabla de permisos -->
+        <div class="table-responsive">
+            <table class="table table-hover text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rol</th>
+                        <th>Módulo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var p in Model)
+                        {
+                            <tr>
+                                <td>@p.ID_permiso</td>
+                                <td>@p.Nombre_rol</td>
+                                <td>@p.Nombre_modulo</td>
+                                <td>
+                                    @if (p.Estado_permiso == 1)
+                                    {
+                                        <span class="badge-activo">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-inactivo">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@p.ID_permiso" class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@p.ID_permiso" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-muted">No hay permisos registrados</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>

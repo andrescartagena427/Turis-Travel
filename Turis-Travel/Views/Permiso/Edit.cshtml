@@ -1,0 +1,79 @@
+﻿@model Turis_Travel.Models.Permiso
+@{
+    ViewData["Title"] = "Editar Permiso";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<style>
+    .card-centered {
+        max-width: 780px;
+        margin: 0 auto;
+    }
+
+    .card-header-custom {
+        background: linear-gradient(90deg, #00b4d8, #0096c7);
+        color: #fff;
+    }
+
+    .btn-save {
+        background: linear-gradient(90deg, #4a00e0, #8e2de2);
+        color: #fff;
+    }
+</style>
+
+<div class="py-4">
+    <div class="card shadow card-centered">
+        <div class="card-header card-header-custom">
+            <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Editar Permiso</h5>
+        </div>
+
+        <div class="card-body">
+            <form asp-controller="Permiso" asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+
+                <!-- hidden: usa exactamente el nombre de la propiedad del modelo -->
+                <input type="hidden" asp-for="ID_permiso" />
+
+                <div class="mb-3">
+                    <label class="form-label">Rol (ID)</label>
+                    <input asp-for="ID_rol" class="form-control" />
+                    <span asp-validation-for="ID_rol" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Módulo (ID)</label>
+                    <input asp-for="ID_modulo" class="form-control" />
+                    <span asp-validation-for="ID_modulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Estado</label>
+                    <!-- Valores compatibles con tu BD: 1 = Activo, 0 = Inactivo -->
+                    <select asp-for="Estado_permiso" class="form-select">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                    <span asp-validation-for="Estado_permiso" class="text-danger"></span>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-save px-4 me-2">
+                        <i class="bi bi-check-circle me-1"></i>Guardar Cambios
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

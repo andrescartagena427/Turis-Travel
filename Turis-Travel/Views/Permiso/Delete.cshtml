@@ -1,0 +1,80 @@
+﻿@model Turis_Travel.Models.Permiso
+@{
+    ViewData["Title"] = "Eliminar Permiso";
+    Layout = "~/Views/Shared/Index2.cshtml";
+}
+
+<style>
+    .card-centered {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .card-header-custom {
+        background: linear-gradient(90deg, #e63946, #d90429);
+        color: #fff;
+    }
+
+    .btn-delete {
+        background: linear-gradient(90deg, #e63946, #d90429);
+        border: none;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+        transition: 0.3s ease;
+    }
+
+        .btn-delete:hover {
+            background: linear-gradient(90deg, #d90429, #9a031e);
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+        }
+</style>
+
+<div class="py-4">
+    <div class="card shadow card-centered">
+        <div class="card-header card-header-custom">
+            <h5 class="mb-0"><i class="bi bi-trash3-fill me-2"></i>Eliminar Permiso</h5>
+        </div>
+
+        <div class="card-body">
+            <h5 class="text-center text-danger mb-4">
+                ¿Estás seguro de que deseas eliminar este permiso?
+            </h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">ID Permiso:</label>
+                <p>@Model.ID_permiso</p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Rol (ID):</label>
+                <p>@Model.ID_rol</p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Módulo (ID):</label>
+                <p>@Model.ID_modulo</p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Estado:</label>
+                <p>@(Model.Estado_permiso == 1 ? "Activo" : "Inactivo")</p>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="ID_permiso" />
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-delete px-4 me-2">
+                        <i class="bi bi-trash me-1"></i>Eliminar
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
