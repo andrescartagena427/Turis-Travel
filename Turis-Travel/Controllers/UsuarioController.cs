@@ -3,7 +3,7 @@ using Turismo_Viajes.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Turismo_Viajes.Controllers
+namespace Turis_Travel.Controllers
 {
     public class UsuarioController : Controller
     {

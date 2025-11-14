@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Turis_Travel.Models.Paquetes>
+
+@{
+    ViewData["Title"] = "Paquetes Turísticos";
+}
+
+<style>
+    /* Contenedor principal */
+    .dashboard-card {
+        border: none;
+        border-radius: 16px;
+        padding: 25px;
+        background: #ffffff;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease;
+    }
+
+        .dashboard-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+    /* Cabecera estilizada */
+    .card-title-main {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1d3557;
+    }
+
+    /* Tabla premium */
+    .table-premium {
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+
+        .table-premium thead {
+            background: #1d3557;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .table-premium tbody tr {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            transition: transform .15s ease, box-shadow .2s ease;
+        }
+
+            .table-premium tbody tr:hover {
+                transform: scale(1.01);
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            }
+
+        .table-premium td,
+        .table-premium th {
+            vertical-align: middle;
+            padding: 16px;
+        }
+
+    /* Botones elegantes */
+    .btn-glass {
+        border-radius: 10px;
+        padding: 6px 14px;
+        font-weight: 600;
+        backdrop-filter: blur(4px);
+        transition: 0.2s ease;
+    }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+        }
+</style>
+
+<div class="dashboard-card mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="card-title-main">Paquetes Turísticos</h2>
+
+        <a asp-action="Create" class="btn btn-primary btn-glass">
+            <i class="bi bi-plus-circle me-1"></i> Crear Nuevo Paquete
+        </a>
+    </div>
+
+    <table class="table table-premium w-100">
+        <thead class="text-white">
+            <tr>
+                <th>Nombre</th>
+                <th>Precio Base</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre_paquete</td>
+                    <td>@item.Precio_base.ToString("C2")</td>
+                    <td>@item.Fecha_inicio?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Fecha_fin?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Estado</td>
+
+                    <td class="text-center">
+
+                        <a asp-action="Details" asp-route-id="@item.ID_paquete"
+                           class="btn btn-info btn-sm btn-glass me-1">
+                            <i class="bi bi-eye"></i>
+                        </a>
+
+                        <a asp-action="Edit" asp-route-id="@item.ID_paquete"
+                           class="btn btn-warning btn-sm btn-glass me-1 text-white">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.ID_paquete"
+                           class="btn btn-danger btn-sm btn-glass">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

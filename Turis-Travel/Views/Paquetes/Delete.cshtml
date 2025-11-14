@@ -1,0 +1,95 @@
+﻿@model Turis_Travel.Models.Paquetes
+
+@{
+    ViewData["Title"] = "Eliminar Paquete";
+}
+
+<style>
+    .delete-card {
+        max-width: 650px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 35px;
+        box-shadow: 0 10px 32px rgba(0,0,0,.10);
+        transition: .3s ease;
+    }
+
+    .delete-title {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #d00000;
+    }
+
+    .delete-text {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .delete-info {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-left: 5px solid #d00000;
+    }
+
+        .delete-info strong {
+            color: #1d3557;
+        }
+
+    .btn-glass {
+        border-radius: 10px;
+        padding: 8px 18px;
+        font-weight: 600;
+        backdrop-filter: blur(4px);
+        transition: .2s ease;
+    }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        }
+
+</style>
+
+
+<div class="delete-card">
+
+    <h2 class="delete-title mb-3">
+        <i class="bi bi-trash3-fill"></i> Eliminar Paquete
+    </h2>
+
+    <p class="delete-text">
+        ¿Estás seguro de que deseas eliminar este paquete turístico?
+        <br>Esta acción <strong>no se puede deshacer</strong>.
+    </p>
+
+    <div class="delete-info shadow-sm">
+        <p><strong>Nombre:</strong> @Model.Nombre_paquete</p>
+        <p><strong>Descripción:</strong> @Model.Descripcion</p>
+        <p><strong>Precio:</strong> @Model.Precio_base.ToString("C2")</p>
+        <p><strong>Fecha Inicio:</strong> @Model.Fecha_inicio?.ToString("dd/MM/yyyy")</p>
+        <p><strong>Fecha Fin:</strong> @Model.Fecha_fin?.ToString("dd/MM/yyyy")</p>
+        <p><strong>Capacidad:</strong> @Model.Capacidad_maxima</p>
+        <p><strong>Estado:</strong> @Model.Estado</p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ID_paquete" />
+
+        <div class="d-flex justify-content-between mt-3">
+
+            <a asp-action="Index" class="btn btn-secondary btn-glass">
+                <i class="bi bi-arrow-left"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-danger btn-glass">
+                <i class="bi bi-trash"></i> Eliminar Definitivamente
+            </button>
+
+        </div>
+    </form>
+
+</div>

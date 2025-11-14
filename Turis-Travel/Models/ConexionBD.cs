@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System.IO;
 
 namespace Turis_Travel.Models
@@ -15,15 +15,12 @@ namespace Turis_Travel.Models
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            connectionString = builder.GetConnectionString("DefaultConnection");
-
-
+            connectionString = builder.GetConnectionString("DefaultConnection") ?? "";
         }
 
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
         }
-
     }
 }
