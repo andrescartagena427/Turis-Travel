@@ -56,7 +56,7 @@
                 box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
 
-        .btn-primary {
+        .btn-login {
             width: 100%;
             background: #005fcc;
             color: white;
@@ -68,44 +68,9 @@
             transition: 0.3s;
         }
 
-            .btn-primary:hover {
+            .btn-login:hover {
                 background: #003d99;
             }
-
-        .links {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-            .links a {
-                color: #005fcc;
-                text-decoration: none;
-                font-weight: 600;
-            }
-
-        .btn-social {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .google {
-            background: white;
-            border: 1px solid #ccc;
-        }
-
-        .facebook {
-            background: #1877f2;
-            color: white;
-        }
 
         footer {
             margin-top: 20px;
@@ -115,18 +80,15 @@
         }
 
         @@keyframes fadeIn {
-            from
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-        {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -136,11 +98,12 @@
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
 
-        <form method="post" asp-action="IniciarSesion">
+        <!-- FORMULARIO CORRECTO -->
+        <form method="post" asp-action="Index">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Usuario</label>
-                <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu usuario" required />
+                <label class="form-label fw-semibold">Correo</label>
+                <input type="text" name="correo" class="form-control" placeholder="Ingresa tu correo" required />
             </div>
 
             <div class="mb-3">
@@ -158,7 +121,6 @@
             <button type="submit" class="btn-login">Entrar</button>
 
         </form>
-
 
         <footer>
             © Turis Travel - 2025

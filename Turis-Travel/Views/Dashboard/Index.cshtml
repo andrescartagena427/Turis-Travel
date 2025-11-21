@@ -1,0 +1,217 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - Turis Travel</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        body {
+            background: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* ================= TOPBAR ================= */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: #00b7cc;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+
+            .topbar a {
+                color: white;
+                font-weight: 500;
+                margin-left: 20px;
+                text-decoration: none;
+            }
+
+                .topbar a:hover {
+                    text-decoration: underline;
+                }
+
+        /* ================= SIDEBAR ================= */
+        .sidebar {
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 240px;
+            height: calc(100vh - 65px);
+            background: #ffffff;
+            padding-top: 25px;
+            border-right: 1px solid #e5e5e5;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+            .sidebar h5 {
+                font-weight: 700;
+                color: #008a9a;
+                padding-left: 25px;
+                margin-bottom: 25px;
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 14px 25px;
+                color: #444;
+                font-size: 15px;
+                font-weight: 500;
+                text-decoration: none;
+                transition: 0.25s;
+            }
+
+                .sidebar a:hover {
+                    background: #e8faff;
+                    color: #00b7cc;
+                    padding-left: 30px;
+                }
+
+                .sidebar a.active {
+                    background: #dff8ff;
+                    border-right: 4px solid #00b7cc;
+                    color: #00b7cc;
+                    font-weight: 700;
+                }
+
+        /* ================= CONTENT ================= */
+        .content {
+            margin-left: 260px;
+            padding: 95px 40px;
+        }
+
+        /* Tarjetas dashboard */
+        .dash-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+            .dash-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            }
+
+        .dash-icon {
+            font-size: 34px;
+            color: #00b7cc;
+        }
+
+        .dash-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .dash-label {
+            color: #777;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         TOPBAR — Header Azul
+    ========================================= -->
+    <div class="topbar">
+        <span style="font-size:22px; font-weight:bold;">Turis Travel</span>
+
+        <div>
+            <a href="/Home/Index">🏠 Inicio</a>
+            <a href="/Configuracion">⚙️ Configuración</a>
+            <a href="/Gestion">📁 Gestión</a>
+            <a href="/Privacidad">🔒 Privacidad</a>
+            <a href="/Login">🔐 Salir</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         SIDEBAR — Menú lateral
+    ========================================= -->
+    <div class="sidebar">
+        <h5>Panel Administrativo</h5>
+
+        <a href="#" class="active"><i class="bi bi-speedometer"></i> Dashboard</a>
+        <a href="/Destinos"><i class="bi bi-geo-alt"></i> Destinos</a>
+        <a href="/Paquetes"><i class="bi bi-box"></i> Paquetes</a>
+        <a href="/Reservas"><i class="bi bi-journal-bookmark"></i> Reservas</a>
+        <a href="/Clientes"><i class="bi bi-people"></i> Clientes</a>
+        <a href="/Reportes"><i class="bi bi-graph-up"></i> Reportes</a>
+        <a href="/Configuracion"><i class="bi bi-gear"></i> Configuración</a>
+    </div>
+
+    <!-- ========================================
+         CONTENIDO — Dashboard
+    ========================================= -->
+    <div class="content">
+        <h2 class="fw-bold mb-3">Dashboard General</h2>
+        <p class="text-muted">Resumen de actividad del sistema.</p>
+
+        <div class="row g-4 mt-2">
+
+            <!-- CARD 1 -->
+            <div class="col-md-3">
+                <div class="dash-card">
+                    <i class="bi bi-journal-check dash-icon"></i>
+                    <div class="dash-number">124</div>
+                    <div class="dash-label">Reservas del mes</div>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-md-3">
+                <div class="dash-card">
+                    <i class="bi bi-cash-coin dash-icon"></i>
+                    <div class="dash-number">$85,620</div>
+                    <div class="dash-label">Ingresos del mes</div>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="col-md-3">
+                <div class="dash-card">
+                    <i class="bi bi-person-plus dash-icon"></i>
+                    <div class="dash-number">32</div>
+                    <div class="dash-label">Nuevos clientes</div>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="col-md-3">
+                <div class="dash-card">
+                    <i class="bi bi-calendar2-week dash-icon"></i>
+                    <div class="dash-number">18</div>
+                    <div class="dash-label">Próximas salidas</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
