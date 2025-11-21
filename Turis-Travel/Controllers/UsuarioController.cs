@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Turismo_Viajes.Models;
+using Turis_Travel.Models;
 using System.Collections.Generic;
 using System.Linq;
 

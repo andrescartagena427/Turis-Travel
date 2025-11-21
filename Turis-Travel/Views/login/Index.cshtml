@@ -1,0 +1,169 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Turis Travel</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #007bff, #00a8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 380px;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004aad;
+        }
+
+        label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+            input:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+        .btn-primary {
+            width: 100%;
+            background: #005fcc;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .btn-primary:hover {
+                background: #003d99;
+            }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+            .links a {
+                color: #005fcc;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+        .btn-social {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .google {
+            background: white;
+            border: 1px solid #ccc;
+        }
+
+        .facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+
+        <form method="post" asp-action="IniciarSesion">
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Usuario</label>
+                <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu usuario" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Contraseña</label>
+                <input type="password" name="clave" class="form-control" placeholder="Ingresa tu contraseña" required />
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <button type="submit" class="btn-login">Entrar</button>
+
+        </form>
+
+
+        <footer>
+            © Turis Travel - 2025
+        </footer>
+    </div>
+
+</body>
+</html>
