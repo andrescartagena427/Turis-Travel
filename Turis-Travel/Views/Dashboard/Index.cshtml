@@ -1,217 +1,274 @@
 ﻿@{
-    Layout = null;
+    ViewData["Title"] = "Dashboard";
 }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard - Turis Travel</title>
+<!-- ====== ESTILOS PERSONALIZADOS ====== -->
+<style>
+    body {
+        background: #f5f7fb;
+        font-family: 'Segoe UI', sans-serif;
+    }
 
-    <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    /* SIDEBAR */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #ffffff;
+        position: fixed;
+        left: 0;
+        top: 0;
+        border-right: 1px solid #e7e7e7;
+        padding: 25px 0;
+    }
 
-    <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <style>
-
-        body {
-            background: #f4f6f9;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        /* ================= TOPBAR ================= */
-        .topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 65px;
-            background: #00b7cc;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 25px;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-        }
-
-            .topbar a {
-                color: white;
-                font-weight: 500;
-                margin-left: 20px;
-                text-decoration: none;
-            }
-
-                .topbar a:hover {
-                    text-decoration: underline;
-                }
-
-        /* ================= SIDEBAR ================= */
-        .sidebar {
-            position: fixed;
-            top: 65px;
-            left: 0;
-            width: 240px;
-            height: calc(100vh - 65px);
-            background: #ffffff;
-            padding-top: 25px;
-            border-right: 1px solid #e5e5e5;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-        }
-
-            .sidebar h5 {
-                font-weight: 700;
-                color: #008a9a;
-                padding-left: 25px;
-                margin-bottom: 25px;
-            }
-
-            .sidebar a {
-                display: block;
-                padding: 14px 25px;
-                color: #444;
-                font-size: 15px;
-                font-weight: 500;
-                text-decoration: none;
-                transition: 0.25s;
-            }
-
-                .sidebar a:hover {
-                    background: #e8faff;
-                    color: #00b7cc;
-                    padding-left: 30px;
-                }
-
-                .sidebar a.active {
-                    background: #dff8ff;
-                    border-right: 4px solid #00b7cc;
-                    color: #00b7cc;
-                    font-weight: 700;
-                }
-
-        /* ================= CONTENT ================= */
-        .content {
-            margin-left: 260px;
-            padding: 95px 40px;
-        }
-
-        /* Tarjetas dashboard */
-        .dash-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            transition: 0.3s;
-        }
-
-            .dash-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-            }
-
-        .dash-icon {
-            font-size: 34px;
-            color: #00b7cc;
-        }
-
-        .dash-number {
-            font-size: 32px;
+        .sidebar .title {
+            font-size: 20px;
             font-weight: 700;
-            margin-top: 5px;
+            padding-left: 25px;
+            margin-bottom: 20px;
         }
 
-        .dash-label {
-            color: #777;
+        .sidebar .menu-item {
+            padding: 14px 25px;
             font-size: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-    </style>
-</head>
+            .sidebar .menu-item:hover,
+            .sidebar .menu-item.active {
+                background: #eef4ff;
+                border-left: 4px solid #2f80ed;
+                padding-left: 21px;
+                color: #2f80ed;
+            }
 
-<body>
+    /* NAVBAR SUPERIOR */
+    .navbar-top {
+        height: 60px;
+        background: #ffffff;
+        border-bottom: 1px solid #e7e7e7;
+        padding: 0 30px;
+        margin-left: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-    <!-- ========================================
-         TOPBAR — Header Azul
-    ========================================= -->
-    <div class="topbar">
-        <span style="font-size:22px; font-weight:bold;">Turis Travel</span>
+    .nav-search {
+        width: 350px;
+    }
 
-        <div>
-            <a href="/Home/Index">🏠 Inicio</a>
-            <a href="/Configuracion">⚙️ Configuración</a>
-            <a href="/Gestion">📁 Gestión</a>
-            <a href="/Privacidad">🔒 Privacidad</a>
-            <a href="/Login">🔐 Salir</a>
+    /* CONTENIDO PRINCIPAL */
+    .main-content {
+        margin-left: 250px;
+        padding: 35px;
+    }
+
+    /* TARJETAS */
+    .card-summary {
+        border-radius: 12px;
+        padding: 25px;
+        border: 1px solid #e7e7e7;
+        background: white;
+        transition: 0.2s;
+    }
+
+        .card-summary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+        }
+
+    .summary-title {
+        font-size: 15px;
+        color: #555;
+    }
+
+    .summary-value {
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: 8px;
+    }
+
+    .summary-change {
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    /* ACCESOS RÁPIDOS */
+    .quick-card {
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #e7e7e7;
+        background: white;
+        transition: .2s;
+        cursor: pointer;
+    }
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+        }
+
+    /* TABLA */
+    table {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .status {
+        padding: 6px 12px;
+        border-radius: 25px;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+    }
+
+        .status.confirmado {
+            background: #44c767;
+        }
+
+        .status.pendiente {
+            background: #f5a623;
+        }
+
+        .status.cancelado {
+            background: #e94b4b;
+        }
+</style>
+
+<!-- ====== SIDEBAR ====== -->
+<div class="sidebar">
+    <div class="title">Agencia Viajes<br><span style="font-size:12px;color:#888;">Panel de Control</span></div>
+
+    <div class="menu-item active"><i class="bi bi-speedometer2"></i> Dashboard</div>
+    <div class="menu-item"><i class="bi bi-geo-alt"></i> Destinos</div>
+    <div class="menu-item"><i class="bi bi-box-seam"></i> Paquetes Turísticos</div>
+    <div class="menu-item"><i class="bi bi-journal-check"></i> Reservas</div>
+    <div class="menu-item"><i class="bi bi-people"></i> Clientes</div>
+    <div class="menu-item"><i class="bi bi-gear"></i> Configuración</div>
+</div>
+
+<!-- ====== NAVBAR SUPERIOR ====== -->
+<div class="navbar-top">
+    <input type="text" class="form-control nav-search" placeholder="Buscar cliente, reserva, destino...">
+
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-bell" style="font-size:20px; cursor:pointer;"></i>
+        <img src="https://i.ibb.co/2kf9tRb/user.png" width="40" style="border-radius:50%;">
+    </div>
+</div>
+
+<!-- ====== CONTENIDO PRINCIPAL ====== -->
+<div class="main-content">
+
+    <h2 class="fw-bold">Resumen Ejecutivo</h2>
+    <p class="text-muted">Bienvenido, aquí tienes un resumen de la actividad de tu agencia.</p>
+
+    <!-- ====== TARJETAS DE RESUMEN ====== -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card-summary">
+                <div class="summary-title">Reservas este mes</div>
+                <div class="summary-value">124</div>
+                <div class="text-success summary-change">↑ +15.2%</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-summary">
+                <div class="summary-title">Ingresos este mes</div>
+                <div class="summary-value">$85,620</div>
+                <div class="text-success summary-change">↑ +8.5%</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-summary">
+                <div class="summary-title">Nuevos Clientes</div>
+                <div class="summary-value">32</div>
+                <div class="text-success summary-change">↑ +21.0%</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-summary">
+                <div class="summary-title">Próximas Salidas</div>
+                <div class="summary-value">18</div>
+                <div class="text-danger summary-change">↓ -5.0%</div>
+            </div>
         </div>
     </div>
 
-    <!-- ========================================
-         SIDEBAR — Menú lateral
-    ========================================= -->
-    <div class="sidebar">
-        <h5>Panel Administrativo</h5>
+    <h4 class="fw-bold mt-4">Accesos Rápidos</h4>
 
-        <a href="#" class="active"><i class="bi bi-speedometer"></i> Dashboard</a>
-        <a href="/Destinos"><i class="bi bi-geo-alt"></i> Destinos</a>
-        <a href="/Paquetes"><i class="bi bi-box"></i> Paquetes</a>
-        <a href="/Reservas"><i class="bi bi-journal-bookmark"></i> Reservas</a>
-        <a href="/Clientes"><i class="bi bi-people"></i> Clientes</a>
-        <a href="/Reportes"><i class="bi bi-graph-up"></i> Reportes</a>
-        <a href="/Configuracion"><i class="bi bi-gear"></i> Configuración</a>
-    </div>
-
-    <!-- ========================================
-         CONTENIDO — Dashboard
-    ========================================= -->
-    <div class="content">
-        <h2 class="fw-bold mb-3">Dashboard General</h2>
-        <p class="text-muted">Resumen de actividad del sistema.</p>
-
-        <div class="row g-4 mt-2">
-
-            <!-- CARD 1 -->
-            <div class="col-md-3">
-                <div class="dash-card">
-                    <i class="bi bi-journal-check dash-icon"></i>
-                    <div class="dash-number">124</div>
-                    <div class="dash-label">Reservas del mes</div>
-                </div>
+    <!-- ====== ACCESOS RÁPIDOS ====== -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="quick-card">
+                <h6><i class="bi bi-plus-circle"></i> Crear nueva reserva</h6>
+                <p class="text-muted">Registra una reserva para un cliente.</p>
             </div>
-
-            <!-- CARD 2 -->
-            <div class="col-md-3">
-                <div class="dash-card">
-                    <i class="bi bi-cash-coin dash-icon"></i>
-                    <div class="dash-number">$85,620</div>
-                    <div class="dash-label">Ingresos del mes</div>
-                </div>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="col-md-3">
-                <div class="dash-card">
-                    <i class="bi bi-person-plus dash-icon"></i>
-                    <div class="dash-number">32</div>
-                    <div class="dash-label">Nuevos clientes</div>
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="col-md-3">
-                <div class="dash-card">
-                    <i class="bi bi-calendar2-week dash-icon"></i>
-                    <div class="dash-number">18</div>
-                    <div class="dash-label">Próximas salidas</div>
-                </div>
-            </div>
-
         </div>
-
+        <div class="col-md-4">
+            <div class="quick-card">
+                <h6><i class="bi bi-person-plus"></i> Añadir nuevo cliente</h6>
+                <p class="text-muted">Agrega un nuevo perfil de cliente.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="quick-card" style="background:#fff5e6;">
+                <h6><i class="bi bi-briefcase"></i> Crear Paquete Turístico</h6>
+                <p class="text-muted">Diseña una nueva oferta de viaje.</p>
+            </div>
+        </div>
     </div>
 
-</body>
-</html>
+    <h4 class="fw-bold">Últimas Reservas</h4>
+
+    <!-- ====== TABLA ====== -->
+    <table class="table mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Cliente</th>
+                <th>Destino</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ana Pérez</td>
+                <td>Cancún, México</td>
+                <td>2024-08-15</td>
+                <td><span class="status confirmado">Confirmado</span></td>
+            </tr>
+            <tr>
+                <td>Luis García</td>
+                <td>Kioto, Japón</td>
+                <td>2024-09-02</td>
+                <td><span class="status pendiente">Pendiente</span></td>
+            </tr>
+            <tr>
+                <td>Marta Jiménez</td>
+                <td>París, Francia</td>
+                <td>2024-07-28</td>
+                <td><span class="status confirmado">Confirmado</span></td>
+            </tr>
+            <tr>
+                <td>Carlos Rodríguez</td>
+                <td>Roma, Italia</td>
+                <td>2024-10-10</td>
+                <td><span class="status cancelado">Cancelado</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- BOOTSTRAP & ICONS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
