@@ -1,0 +1,48 @@
+﻿
+@model IEnumerable<Turis_Travel.Models.Destino>
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Destinos Disponibles 🌎</h2>
+
+        <a class="btn btn-success btn-lg px-4" href="/Destinos/Create">
+            ➕ Añadir Destino
+        </a>
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-sm rounded-4 border-0 overflow-hidden">
+
+                    <img src="@item.ImagenUrl" class="card-img-top" style="height:180px; object-fit:cover" />
+
+                    <div class="card-body">
+                        <small class="text-muted">DESTINO</small>
+
+                        <h5 class="fw-bold">@item.Nombre</h5>
+
+                        <p class="text-muted mb-1">
+                            @item.Ciudad, @item.Pais
+                        </p>
+
+                        <p class="fw-bold text-success fs-5 mb-3">
+                            $@item.Precio.ToString("N0")
+                        </p>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="/Destinos/Edit/@item.Id" class="btn btn-primary btn-sm">Editar ✏</a>
+                            <a href="/Destinos/Delete/@item.Id" class="btn btn-danger btn-sm">Eliminar 🗑</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

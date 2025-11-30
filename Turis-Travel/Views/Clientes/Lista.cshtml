@@ -1,0 +1,37 @@
+﻿@model List<Turis_Travel.Models.Cliente>
+
+<div class="container mt-5">
+    <h2 class="mb-3">Clientes Registrados</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Registro</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Nombre</td>
+                    <td>@c.Cedula</td>
+                    <td>@c.Telefono</td>
+                    <td>@c.Email</td>
+                    <td>@c.FechaRegistro.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Clientes/Crear" class="btn btn-primary">Añadir Cliente</a>
+</div>

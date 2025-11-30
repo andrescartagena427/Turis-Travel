@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Turis_Travel.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Lista de Reservas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Reservas</h2>
+        <a asp-action="Crear" class="btn btn-success">Crear nueva reserva</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <table class="table table-striped table-bordered bg-white">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ID Cliente</th>
+                <th>ID Paquete</th>
+                <th>ID Itinerario</th>
+                <th>ID Transporte</th>
+                <th>Fecha solicitud</th>
+                <th>Estado</th>
+                <th>Pasajeros</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="9" class="text-center">No hay reservas registradas.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.ID_reserva</td>
+                        <td>@r.ID_cliente</td>
+                        <td>@(r.ID_paquete.HasValue? r.ID_paquete.ToString() : "—")</td>
+                        <td>@(r.ID_itinerario.HasValue? r.ID_itinerario.ToString() : "—")</td>
+                        <td>@(r.ID_transporte.HasValue? r.ID_transporte.ToString() : "—")</td>
+                        <td>@r.Fecha_solicitud.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@r.Estado</td>
+                        <td>@r.Numero_pasajeros</td>
+                        <td>@string.Format("{0:C}", r.Precio_total)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+

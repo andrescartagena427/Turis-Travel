@@ -1,0 +1,103 @@
+﻿@model Turis_Travel.Models.Paquete
+
+@{
+    ViewData["Title"] = "Crear Paquete";
+}
+
+<style>
+    .form-card {
+        max-width: 750px;
+        margin: auto;
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease;
+    }
+
+        .form-card:hover {
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
+        }
+
+    .form-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #1d3557;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #1d3557;
+    }
+
+    .btn-glass {
+        border-radius: 10px;
+        padding: 8px 18px;
+        font-weight: 600;
+    }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        }
+</style>
+
+<div class="form-card mt-4">
+    <h2 class="form-title">Crear Nuevo Paquete Turístico</h2>
+
+    <!-- FORMULARIO CORRECTO: asp-controller + asp-action + method POST -->
+    <form asp-controller="Paquete" asp-action="Crear" method="post">
+        @* Anti-forgery token (recomendado) *@
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label">Nombre del Paquete</label>
+            <input asp-for="Nombre_paquete" class="form-control" />
+            <span asp-validation-for="Nombre_paquete" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea asp-for="Descripcion" class="form-control"></textarea>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Precio Base</label>
+            <input asp-for="Precio_base" type="number" step="0.01" class="form-control" />
+            <span asp-validation-for="Precio_base" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Fecha Inicio</label>
+                <input asp-for="Fecha_inicio" type="date" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Fecha Fin</label>
+                <input asp-for="Fecha_fin" type="date" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Capacidad Máxima</label>
+            <input asp-for="Capacidad_maxima" type="number" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <input asp-for="Estado" class="form-control" />
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-controller="Paquete" asp-action="Index" class="btn btn-secondary btn-glass">Volver</a>
+            <button type="submit" class="btn btn-success btn-glass px-4">Guardar</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

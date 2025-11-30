@@ -2,24 +2,161 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="relative h-[90vh] w-full bg-cover bg-center"
-         style="background-image: url('/ImagenJV.jpg');">
+<!-- HERO -->
+<section class="position-relative">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
+         class="w-100"
+         style="height: 500px; object-fit: cover; border-radius: 0 0 25px 25px;" />
 
-    <!-- Capa oscura -->
-    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-
-    <!-- Contenido -->
-    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-6">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4">
-            Descubre tu Próxima Aventura
-        </h1>
-        <p class="text-lg md:text-xl mb-6 max-w-2xl">
-            Explora los destinos más increíbles del mundo con nuestros paquetes personalizados.
-            Tu viaje soñado comienza aquí.
-        </p>
-        <a href="#"
-           class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium transition">
-            Ver Paquetes
-        </a>
+    <!-- Overlay oscuro para lectura -->
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+         style="background: rgba(0,0,0,0.35); border-radius: 0 0 25px 25px;">
     </div>
+
+    <!-- CONTENIDO CENTRADO -->
+    <div class="position-absolute top-50 start-50 translate-middle text-white text-center px-3"
+         style="max-width: 800px;">
+
+        <h1 class="fw-bold display-5">
+            Tu Próxima Aventura Comienza Aquí
+        </h1>
+
+        <p class="mt-2 fs-5">
+            Busca, descubre y reserva tu próximo viaje inolvidable con nosotros.
+        </p>
+
+        <!-- BUSCADOR -->
+        <div class="bg-white shadow p-3 rounded-3 mt-4 d-flex flex-column flex-md-row gap-3">
+
+            <input type="text"
+                   class="form-control"
+                   placeholder="Buscar destino..." />
+
+            <input type="date"
+                   class="form-control" />
+
+            <button class="btn btn-primary px-4">
+                Explorar
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="fw-bold mv-4 text-center">Ofertas destacadas para ti</h2>
+
+    <div class="row g-4">
+
+        <!-- CARD 1 -->
+        <div class="col-md-4">
+            <div class="card shadow rounded-4 border-0 oferta-card overflow-hidden">
+                <img src="~/Francia.jpg"
+                     class="card-img-top"
+                     style="height: 220px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">París - Francia</h5>
+                    <p class="text-muted mb-2">5 días / 4 noches</p>
+                    <p class="fw-bold text-primary fs-5">Desde $850 USD</p>
+                    <a href="#" class="btn btn-primary w-100 rounded-pill">
+                        Ver oferta
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="col-md-4">
+            <div class="card shadow rounded-4 border-0 oferta-card overflow-hidden">
+                <img src="~/Cancun - Mexico.jpeg"
+                     class="card-img-top"
+                     style="height: 220px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Cancún - México</h5>
+                    <p class="text-muted mb-2">6 días / 5 noches</p>
+                    <p class="fw-bold text-primary fs-5">Desde $650 USD</p>
+                    <a href="#" class="btn btn-primary w-100 rounded-pill">
+                        Ver oferta
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="col-md-4">
+            <div class="card shadow rounded-4 border-0 oferta-card overflow-hidden">
+                <img src="~/Bali - Indonesia.jpg"
+                     class="card-img-top"
+                     style="height: 220px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Bali - Indonesia</h5>
+                    <p class="text-muted mb-2">7 días / 6 noches</p>
+                    <p class="fw-bold text-primary fs-5">Desde $900 USD</p>
+                    <a href="#" class="btn btn-primary w-100 rounded-pill">
+                        Ver oferta
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- TUS PRÓXIMAS RESERVAS -->
+<section class="container my-5">
+
+    <h3 class="fw-bold mb-4">Tus Próximas Reservas</h3>
+
+    <!-- Reserva 1 -->
+    <div class="card shadow-sm border-0 mb-3 rounded-4">
+        <div class="row g-0 align-items-center">
+            <div class="col-3">
+                <img src="~/Roma - Italia.jpeg"
+                     class="img-fluid rounded-start"
+                     style="height: 120px; width: 100%; object-fit: cover;">
+            </div>
+
+            <div class="col-6">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-1">Roma - Italia</h5>
+                    <p class="text-muted mb-1">Hotel Boutique Roma Center</p>
+                    <p class="text-secondary small">Fecha: 12 Feb - 18 Feb, 2025</p>
+                </div>
+            </div>
+
+            <div class="col-3 text-end pe-4">
+                <a href="#" class="btn btn-outline-primary rounded-pill px-4">Ver Detalles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reserva 2 -->
+    <div class="card shadow-sm border-0 mb-3 rounded-4">
+        <div class="row g-0 align-items-center">
+            <div class="col-3">
+                <img src="~/Tokio - Japon.jpeg"
+                     class="img-fluid rounded-start"
+                     style="height: 120px; width: 100%; object-fit: cover;">
+            </div>
+
+            <div class="col-6">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-1">Tokio - Japón</h5>
+                    <p class="text-muted mb-1">Hotel Sakura Premium</p>
+                    <p class="text-secondary small">Fecha: 5 Mar - 12 Mar, 2025</p>
+                </div>
+            </div>
+
+            <div class="col-3 text-end pe-4">
+                <a href="#" class="btn btn-outline-primary rounded-pill px-4">Ver Detalles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensaje final -->
+    <p class="text-center mt-4 text-secondary">
+        No tienes más reservas activas.
+        <br>
+        ¿Buscas tu próximo destino?
+        <a href="#" class="text-primary fw-bold text-decoration-none">Explorar destinos →</a>
+    </p>
 </section>

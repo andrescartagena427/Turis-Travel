@@ -1,0 +1,50 @@
+﻿@model Turis_Travel.Models.Destino
+
+@{
+    ViewData["Title"] = "Agregar Destino";
+}
+
+<h2 class="mt-3">Agregar nuevo destino</h2>
+
+<form asp-action="Create" method="post" class="mt-4">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ciudad</label>
+        <input asp-for="Ciudad" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">País</label>
+        <input asp-for="Pais" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio</label>
+        <input asp-for="Precio" type="number" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Imagen (ruta: /img/destinos/...)</label>
+        <input asp-for="ImagenUrl" class="form-control" placeholder="/img/destinos/nombre.jpg" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

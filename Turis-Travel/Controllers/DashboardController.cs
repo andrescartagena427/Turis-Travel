@@ -20,10 +20,16 @@ namespace Turis_Travel.Controllers
 
         public IActionResult Index()
         {
-            // Validación de sesión
+            // Validación de sesión (usuarios admin)
             var rol = HttpContext.Session.GetInt32("IdRol");
-            if (rol == null) return RedirectToAction("Index", "Login");
-            if (rol != 1) return RedirectToAction("Index", "Home");
+
+            // Si no está logueado
+            if (rol == null)
+                return RedirectToAction("Index", "Login");
+
+            // Si NO es administrador
+            if (rol != 1)
+                return RedirectToAction("Index", "Home");
 
             var model = new DashboardViewModel();
 
@@ -55,8 +61,7 @@ namespace Turis_Travel.Controllers
                     model.IngresosEsteMes = Convert.ToDecimal(cmd.ExecuteScalar());
                 }
 
-                // 3️⃣ Nuevos clientes 
-                // (tu tabla NO tiene Fecha_creacion → contamos usuarios donde Estado = 1)
+                // 3️⃣ Cantidad de administradores activos
                 using (var cmd = new MySqlCommand(@"
                     SELECT COUNT(*)
                     FROM Usuarios
@@ -76,17 +81,17 @@ namespace Turis_Travel.Controllers
                     model.ProximasSalidas = Convert.ToInt32(cmd.ExecuteScalar());
                 }
 
-                // 5️⃣ Últimas reservas
+                // 5️⃣ Últimas reservas (CORREGIDO: ahora trae CLIENTES)
                 using (var cmd = new MySqlCommand(@"
                     SELECT 
                         r.ID_reserva,
-                        u.Nombre_usuario,
+                        c.Nombre AS ClienteNombre,
                         p.Nombre_paquete,
                         r.Fecha_solicitud,
                         r.Estado,
                         r.Precio_total
                     FROM Reservas r
-                    LEFT JOIN Usuarios u ON r.ID_usuario = u.ID_usuario
+                    LEFT JOIN Clientes c ON r.ID_cliente = c.ID_cliente
                     LEFT JOIN Paquetes_Turisticos p ON r.ID_paquete = p.ID_paquete
                     ORDER BY r.Fecha_solicitud DESC
                     LIMIT 6", conn))
@@ -98,8 +103,12 @@ namespace Turis_Travel.Controllers
                             model.UltimasReservas.Add(new DashboardReservationItem
                             {
                                 IdReserva = reader.GetInt32("ID_reserva"),
-                                Cliente = reader.IsDBNull("Nombre_usuario") ? "—" : reader.GetString("Nombre_usuario"),
-                                Paquete = reader.IsDBNull("Nombre_paquete") ? "—" : reader.GetString("Nombre_paquete"),
+                                Cliente = reader.IsDBNull("ClienteNombre")
+                                    ? "Cliente eliminado"
+                                    : reader.GetString("ClienteNombre"),
+                                Paquete = reader.IsDBNull("Nombre_paquete")
+                                    ? "—"
+                                    : reader.GetString("Nombre_paquete"),
                                 FechaInicio = reader.GetDateTime("Fecha_solicitud"),
                                 Estado = reader.GetString("Estado"),
                                 Precio = reader.GetDecimal("Precio_total")

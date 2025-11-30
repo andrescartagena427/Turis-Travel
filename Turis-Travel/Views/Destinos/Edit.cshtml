@@ -1,0 +1,75 @@
+﻿@model Turis_Travel.Models.Destino
+
+@{
+    ViewData["Title"] = "Editar Destino";
+}
+
+<h2 class="mt-3">Editar destino</h2>
+
+<form asp-action="Edit" method="post" class="mt-4">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ciudad</label>
+        <input asp-for="Ciudad" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">País</label>
+        <input asp-for="Pais" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio</label>
+        <input asp-for="Precio" type="number" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <!-- ------------------------------ -->
+    <!-- CAMPO DE IMAGEN MEJORADO -->
+    <!-- ------------------------------ -->
+    <div class="mb-3">
+        <label class="form-label">
+            Imagen (pega aquí el enlace de Google Imágenes)
+        </label>
+
+        <input asp-for="ImagenUrl" id="imagenInput" class="form-control" />
+
+        <small class="text-muted">Vista previa de la imagen nueva:</small><br />
+
+        <!-- Vista previa de lo que el usuario pegue -->
+        <img id="previewImg" src="@Model.ImagenUrl" alt="Vista previa" width="200" class="img-thumbnail mt-2" />
+
+        <hr />
+
+        <small class="text-muted">Imagen actual guardada:</small><br />
+        <img src="@Model.ImagenUrl" alt="Imagen actual" width="200" class="img-thumbnail mt-2" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Cambia la vista previa cuando el usuario pega un link
+        document.getElementById('imagenInput').addEventListener('input', function () {
+            document.getElementById('previewImg').src = this.value;
+        });
+    </script>
+}
+

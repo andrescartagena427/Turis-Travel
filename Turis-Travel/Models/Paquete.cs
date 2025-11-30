@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Turis_Travel.Models;
-
 
 namespace Turis_Travel.Models
 {
-    [Table("Paquetes_Turisticos")] 
-    public class Paquetes
+    [Table("Paquetes_Turisticos")]
+    public class Paquete
     {
         [Key]
+        [Column("ID_paquete")]
         public int ID_paquete { get; set; }
 
         [Required]
@@ -21,6 +20,7 @@ namespace Turis_Travel.Models
         public decimal Precio_base { get; set; }
 
         public DateTime? Fecha_inicio { get; set; }
+
         public DateTime? Fecha_fin { get; set; }
 
         public int? Capacidad_maxima { get; set; }

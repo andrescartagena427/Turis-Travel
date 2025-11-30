@@ -4,21 +4,26 @@
 
 <!-- ====== ESTILOS PERSONALIZADOS ====== -->
 <style>
-    body {
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
         background: #f5f7fb;
         font-family: 'Segoe UI', sans-serif;
+        box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+        box-sizing: inherit;
     }
 
     /* SIDEBAR */
     .sidebar {
         width: 250px;
-        height: 100vh;
         background: #ffffff;
-        position: fixed;
-        left: 0;
-        top: 0;
         border-right: 1px solid #e7e7e7;
         padding: 25px 0;
+        float: left;
+        min-height: 100vh;
     }
 
         .sidebar .title {
@@ -28,26 +33,27 @@
             margin-bottom: 20px;
         }
 
-        .sidebar .menu-item {
-            padding: 14px 25px;
-            font-size: 15px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: 0.2s;
+    .menu-item {
+        padding: 14px 25px;
+        font-size: 15px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: #eef4ff;
+            border-left: 4px solid #2f80ed;
+            padding-left: 21px;
+            color: #2f80ed;
         }
 
-            .sidebar .menu-item:hover,
-            .sidebar .menu-item.active {
-                background: #eef4ff;
-                border-left: 4px solid #2f80ed;
-                padding-left: 21px;
-                color: #2f80ed;
-            }
-
-    /* NAVBAR SUPERIOR */
+    /* NAVBAR */
     .navbar-top {
         height: 60px;
         background: #ffffff;
@@ -63,13 +69,13 @@
         width: 350px;
     }
 
-    /* CONTENIDO PRINCIPAL */
+    /* CONTENIDO */
     .main-content {
         margin-left: 250px;
         padding: 35px;
+        min-height: calc(100vh - 60px);
     }
 
-    /* TARJETAS */
     .card-summary {
         border-radius: 12px;
         padding: 25px;
@@ -99,7 +105,6 @@
         margin-top: 6px;
     }
 
-    /* ACCESOS RÁPIDOS */
     .quick-card {
         border-radius: 12px;
         padding: 20px;
@@ -114,7 +119,6 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.05);
         }
 
-    /* TABLA */
     table {
         background: white;
         border-radius: 10px;
@@ -146,12 +150,30 @@
 <div class="sidebar">
     <div class="title">Agencia Viajes<br><span style="font-size:12px;color:#888;">Panel de Control</span></div>
 
-    <div class="menu-item active"><i class="bi bi-speedometer2"></i> Dashboard</div>
-    <div class="menu-item"><i class="bi bi-geo-alt"></i> Destinos</div>
-    <div class="menu-item"><i class="bi bi-box-seam"></i> Paquetes Turísticos</div>
-    <div class="menu-item"><i class="bi bi-journal-check"></i> Reservas</div>
-    <div class="menu-item"><i class="bi bi-people"></i> Clientes</div>
-    <div class="menu-item"><i class="bi bi-gear"></i> Configuración</div>
+    <a href="/Dashboard/Index" class="menu-item active">
+        <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+
+    <a href="/Destinos/Index" class="menu-item">
+        <i class="bi bi-geo-alt"></i> Destinos
+    </a>
+
+    <a href="/Paquetes/Lista" class="menu-item">
+        <i class="bi bi-box-seam"></i> Paquetes Turísticos
+    </a>
+
+    <!-- 🔥 AQUÍ ESTABA EL ERROR: SIN URL → YA LO CORREGÍ -->
+    <a href="/Reserva/Lista" class="menu-item">
+        <i class="bi bi-journal-check"></i> Reservas
+    </a>
+
+    <a href="/Clientes/Lista" class="menu-item">
+        <i class="bi bi-people"></i> Clientes
+    </a>
+
+    <a href="/Configuracion/Index" class="menu-item">
+        <i class="bi bi-gear"></i> Configuración
+    </a>
 </div>
 
 <!-- ====== NAVBAR SUPERIOR ====== -->
@@ -170,7 +192,7 @@
     <h2 class="fw-bold">Resumen Ejecutivo</h2>
     <p class="text-muted">Bienvenido, aquí tienes un resumen de la actividad de tu agencia.</p>
 
-    <!-- ====== TARJETAS DE RESUMEN ====== -->
+    <!-- TARJETAS -->
     <div class="row g-4 mb-4">
         <div class="col-md-3">
             <div class="card-summary">
@@ -204,31 +226,38 @@
 
     <h4 class="fw-bold mt-4">Accesos Rápidos</h4>
 
-    <!-- ====== ACCESOS RÁPIDOS ====== -->
     <div class="row g-4 mb-5">
         <div class="col-md-4">
-            <div class="quick-card">
-                <h6><i class="bi bi-plus-circle"></i> Crear nueva reserva</h6>
-                <p class="text-muted">Registra una reserva para un cliente.</p>
-            </div>
+            <a href="/Reserva/Crear" class="text-decoration-none">
+                <div class="quick-card">
+                    <h6><i class="bi bi-plus-circle"></i> Crear nueva reserva</h6>
+                    <p class="text-muted">Registra una reserva para un cliente.</p>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-4">
-            <div class="quick-card">
-                <h6><i class="bi bi-person-plus"></i> Añadir nuevo cliente</h6>
-                <p class="text-muted">Agrega un nuevo perfil de cliente.</p>
-            </div>
+            <a href="/Clientes/Crear" class="text-decoration-none">
+                <div class="quick-card">
+                    <h6><i class="bi bi-person-plus"></i> Añadir nuevo Cliente</h6>
+                    <p class="text-muted">Agrega un nuevo perfil de cliente.</p>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-4">
-            <div class="quick-card" style="background:#fff5e6;">
-                <h6><i class="bi bi-briefcase"></i> Crear Paquete Turístico</h6>
-                <p class="text-muted">Diseña una nueva oferta de viaje.</p>
-            </div>
+            <a asp-controller="Paquete" asp-action="Crear">
+                <div class="quick-card" style="background:#fff5e6;">
+                    <h6><i class="bi bi-briefcase"></i> Crear Paquete Turístico</h6>
+                    <p class="text-muted">Diseña una nueva oferta de viaje.</p>
+                </div>
+            </a>
         </div>
+
     </div>
 
     <h4 class="fw-bold">Últimas Reservas</h4>
 
-    <!-- ====== TABLA ====== -->
     <table class="table mt-3">
         <thead class="table-light">
             <tr>

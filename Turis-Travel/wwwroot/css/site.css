@@ -1,22 +1,37 @@
-html {
-  font-size: 14px;
+/* QUITAR EL ESPACIO BLANCO */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Quitar espacios */
+.navbar {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Asegurar que el logo quede pegado a la izquierda */
+.navbar-brand {
+    margin-left: 0 !important;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Asegurar que el botón quede pegado a la derecha */
+#navbarT {
+    margin-right: 0 !important;
 }
 
-body {
-  margin-bottom: 60px;
+}
+
+/* HERO */
+.hero {
+    height: 92vh;
+    background-image: url('https://wallpapercosmos.com/w/full/8/c/3/55411-3840x2160-desktop-4k-trentino-alto-adige-wallpaper-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px; /* Para que el navbar no tape el texto */
+}
+
+/* Caja del buscador */
+.search-box {
+    max-width: 650px;
 }

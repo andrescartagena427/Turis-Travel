@@ -1,12 +1,55 @@
-﻿@model Turis_Travel.Models.Paquetes
+﻿@model Turis_Travel.Models.Paquete
 
 @{
     ViewData["Title"] = "Editar Paquete";
 }
 
-<h2 class="mb-4 fw-bold text-center">Editar Paquete Turístico</h2>
+<style>
+    .form-card {
+        max-width: 750px;
+        margin: auto;
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease;
+    }
 
-<div class="card shadow p-4">
+        .form-card:hover {
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
+        }
+
+    .form-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #1d3557;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #1d3557;
+    }
+
+    .btn-glass {
+        border-radius: 10px;
+        padding: 8px 18px;
+        font-weight: 600;
+        backdrop-filter: blur(4px);
+        transition: 0.2s ease;
+    }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+        }
+</style>
+
+
+<div class="form-card mt-4">
+    <h2 class="form-title">Editar Paquete Turístico</h2>
+
     <form asp-action="Edit">
         <input type="hidden" asp-for="ID_paquete" />
 
@@ -46,7 +89,10 @@
             <input asp-for="Estado" class="form-control" />
         </div>
 
-        <button type="submit" class="btn btn-primary px-4">Actualizar</button>
-        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-secondary btn-glass">Volver</a>
+            <button type="submit" class="btn btn-primary btn-glass px-4">Actualizar</button>
+        </div>
     </form>
 </div>
+
