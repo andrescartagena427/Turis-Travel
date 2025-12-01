@@ -4,72 +4,93 @@
     ViewData["Title"] = "Editar Destino";
 }
 
-<h2 class="mt-3">Editar destino</h2>
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white py-3 rounded-top-4">
+            <h3 class="mb-0">
+                ✏️ Editar Destino
+            </h3>
+        </div>
 
-<form asp-action="Edit" method="post" class="mt-4">
-    <input type="hidden" asp-for="Id" />
+        <div class="card-body p-4">
 
-    <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <!-- NOMBRE -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nombre del destino</label>
+                    <input asp-for="Nombre" class="form-control form-control-lg" placeholder="Ej: Playa Blanca" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <!-- CIUDAD Y PAIS -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Ciudad</label>
+                        <input asp-for="Ciudad" class="form-control" placeholder="Ej: Cartagena" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">País</label>
+                        <input asp-for="Pais" class="form-control" placeholder="Ej: Colombia" />
+                    </div>
+                </div>
+
+                <!-- DESCRIPCION -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Descripción</label>
+                    <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Describe el destino..."></textarea>
+                </div>
+
+                <!-- PRECIO -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Precio (USD)</label>
+                    <input asp-for="Precio" type="number" class="form-control" />
+                </div>
+
+                <!-- IMAGEN MEJORADA -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">
+                        Imagen del destino (pega aquí el enlace directo)
+                    </label>
+                    <input asp-for="ImagenUrl" id="imagenInput" class="form-control" placeholder="https://.../foto.jpg" />
+
+                    <!-- Vista previa -->
+                    <div class="mt-3">
+                        <label class="text-muted">Vista previa:</label>
+                        <div class="border rounded p-2 bg-light text-center">
+                            <img id="previewImg"
+                                 src="@Model.ImagenUrl"
+                                 alt="Vista previa"
+                                 class="img-fluid rounded shadow-sm"
+                                 style="max-height: 250px; object-fit: cover;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary px-4">⬅ Volver</a>
+                    <button type="submit" class="btn btn-success px-5">
+                        💾 Guardar cambios
+                    </button>
+                </div>
+
+            </form>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Ciudad</label>
-        <input asp-for="Ciudad" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">País</label>
-        <input asp-for="Pais" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Descripción</label>
-        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
-        <span asp-validation-for="Descripcion" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Precio</label>
-        <input asp-for="Precio" type="number" class="form-control" />
-        <span asp-validation-for="Precio" class="text-danger"></span>
-    </div>
-
-    <!-- ------------------------------ -->
-    <!-- CAMPO DE IMAGEN MEJORADO -->
-    <!-- ------------------------------ -->
-    <div class="mb-3">
-        <label class="form-label">
-            Imagen (pega aquí el enlace de Google Imágenes)
-        </label>
-
-        <input asp-for="ImagenUrl" id="imagenInput" class="form-control" />
-
-        <small class="text-muted">Vista previa de la imagen nueva:</small><br />
-
-        <!-- Vista previa de lo que el usuario pegue -->
-        <img id="previewImg" src="@Model.ImagenUrl" alt="Vista previa" width="200" class="img-thumbnail mt-2" />
-
-        <hr />
-
-        <small class="text-muted">Imagen actual guardada:</small><br />
-        <img src="@Model.ImagenUrl" alt="Imagen actual" width="200" class="img-thumbnail mt-2" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        // Cambia la vista previa cuando el usuario pega un link
+        // Vista previa dinámica
         document.getElementById('imagenInput').addEventListener('input', function () {
             document.getElementById('previewImg').src = this.value;
         });
     </script>
 }
+
 
