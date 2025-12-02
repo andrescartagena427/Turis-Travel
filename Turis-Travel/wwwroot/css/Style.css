@@ -1,0 +1,360 @@
+﻿/* Estilo personalizado en el Layout */
+.text-shadow {
+    text-shadow: 0px 3px 6px rgba(0,0,0,0.4);
+}
+
+.oferta-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.oferta-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+}
+
+.reserva-card:hover {
+    transform: scale(1.01);
+    transition: 0.2s;
+}
+
+/* Navbar general */
+.navbar-custom {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 0.6rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    /* Brand */
+    .navbar-custom .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+        .navbar-custom .navbar-brand span.material-symbols-outlined {
+            font-size: 2rem;
+            color: #2f80ed;
+            margin-right: 0.5rem;
+        }
+
+    /* Links */
+    .navbar-custom .nav-link {
+        color: #555;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+        .navbar-custom .nav-link:hover {
+            color: #2f80ed;
+            transform: translateY(-2px);
+        }
+
+        .navbar-custom .nav-link.active {
+            color: #2f80ed;
+            font-weight: 700;
+        }
+
+    /* Botón */
+    .navbar-custom .btn-primary {
+        border-radius: 25px;
+        padding: 6px 20px;
+        font-weight: 600;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .navbar-custom .btn-primary:hover {
+            background-color: #1565c0;
+            transform: translateY(-2px);
+        }
+
+    /* Toggler */
+    .navbar-custom .navbar-toggler {
+        border: none;
+    }
+
+    .navbar-custom .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%2855,55,55,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/ %3E%3C/svg%3E");
+    }
+
+
+
+/*Estilos del Dashboard*/
+/* ======= GLOBAL ======= */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #f5f7fb;
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* ======= SIDEBAR ======= */
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e7e7e7;
+    padding: 25px 0;
+    float: left;
+    min-height: 100vh;
+}
+
+    .sidebar .title {
+        font-size: 20px;
+        font-weight: 700;
+        padding-left: 25px;
+        margin-bottom: 20px;
+    }
+
+.menu-item {
+    padding: 14px 25px;
+    font-size: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+}
+
+    .menu-item:hover,
+    .menu-item.active {
+        background: #eef4ff;
+        border-left: 4px solid #2f80ed;
+        padding-left: 21px;
+        color: #2f80ed;
+    }
+
+/* ======= NAVBAR ======= */
+.navbar-top {
+    height: 60px;
+    background: #ffffff;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 0 30px;
+    margin-left: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .navbar-top i {
+        transition: transform 0.2s ease;
+    }
+
+        .navbar-top i:hover {
+            transform: scale(1.2);
+        }
+
+.nav-search {
+    width: 350px;
+    border-radius: 20px;
+    padding-left: 15px;
+}
+
+/* ======= MAIN CONTENT ======= */
+.main-content {
+    margin-left: 250px;
+    padding: 35px;
+    min-height: calc(100vh - 60px);
+}
+
+/* ======= CARD SUMMARY ======= */
+.card-summary {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+    .card-summary:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-summary i {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 45px;
+        color: rgba(0,0,0,0.05);
+    }
+
+.summary-title {
+    font-size: 15px;
+    color: #555;
+}
+
+.summary-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.summary-change {
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* ======= STATUS ======= */
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+    .status.confirmado {
+        background: #27ae60;
+        color: #fff;
+    }
+
+    .status.pendiente {
+        background: #f2c94c;
+        color: #333;
+    }
+
+    .status.cancelado {
+        background: #eb5757;
+        color: #fff;
+    }
+
+    .status:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+/* ======= TABLE ======= */
+table.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    background: #fff;
+}
+
+    table.table thead tr {
+        background: #f5f7fb;
+        color: #555;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    table.table thead th {
+        padding: 12px 20px;
+    }
+
+    table.table tbody td {
+        padding: 12px 20px;
+        vertical-align: middle;
+        color: #333;
+        font-size: 14px;
+    }
+
+    table.table tbody tr:nth-child(odd) {
+        background: #fcfcfc;
+    }
+
+    table.table tbody tr:nth-child(even) {
+        background: #fff;
+    }
+
+    table.table tbody tr:hover {
+        background: #eef4ff;
+        transform: translateX(3px);
+        transition: all 0.25s ease;
+    }
+
+    table.table tbody tr td:not(:last-child) {
+        border-right: 1px solid #f0f0f0;
+    }
+
+
+
+
+/* ====== FOOTER MODERNO ====== */
+.footer {
+    background: linear-gradient(135deg, #1f2b44, #2f3c5a);
+    color: #ccc;
+    padding: 40px 0 20px 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-title {
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.footer-text {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .footer-links a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+.footer-divider {
+    border-color: rgba(255,255,255,0.2);
+    margin: 20px 0;
+}
+
+.footer-copy {
+    color: #888;
+    font-size: 13px;
+}
+
+/* Redes sociales */
+.footer-social a {
+    color: #aaa;
+    font-size: 16px;
+    margin-right: 12px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    .footer-social a:hover {
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+        display: flex;
+        margin-top: 10px;
+    }
+}

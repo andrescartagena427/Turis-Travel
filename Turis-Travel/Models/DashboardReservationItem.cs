@@ -1,9 +1,14 @@
-﻿public class DashboardReservationItem
+﻿using System;
+
+namespace Turis_Travel.Models
 {
-    public int IdReserva { get; set; }
-    public string Cliente { get; set; } = string.Empty;
-    public string Paquete { get; set; } = string.Empty;
-    public DateTime FechaInicio { get; set; }
-    public decimal Precio { get; set; }
-    public string Estado { get; set; } = string.Empty;
+    public class DashboardReservationItem
+    {
+        public int IdReserva { get; set; }
+        public string Cliente { get; set; }
+        public string Paquete { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public string Estado { get; set; }
+        public decimal Precio { get; set; }
+    }
 }

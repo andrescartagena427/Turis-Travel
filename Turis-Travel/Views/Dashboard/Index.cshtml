@@ -1,182 +1,23 @@
-﻿@{
+﻿@model Turis_Travel.Models.DashboardViewModel
+
+@{
     ViewData["Title"] = "Dashboard";
 }
 
-<!-- ====== ESTILOS PERSONALIZADOS ====== -->
-<style>
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: #f5f7fb;
-        font-family: 'Segoe UI', sans-serif;
-        box-sizing: border-box;
-    }
 
-    *, *::before, *::after {
-        box-sizing: inherit;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-        width: 250px;
-        background: #ffffff;
-        border-right: 1px solid #e7e7e7;
-        padding: 25px 0;
-        float: left;
-        min-height: 100vh;
-    }
-
-        .sidebar .title {
-            font-size: 20px;
-            font-weight: 700;
-            padding-left: 25px;
-            margin-bottom: 20px;
-        }
-
-    .menu-item {
-        padding: 14px 25px;
-        font-size: 15px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        cursor: pointer;
-        transition: 0.2s;
-        text-decoration: none;
-    }
-
-        .menu-item:hover,
-        .menu-item.active {
-            background: #eef4ff;
-            border-left: 4px solid #2f80ed;
-            padding-left: 21px;
-            color: #2f80ed;
-        }
-
-    /* NAVBAR */
-    .navbar-top {
-        height: 60px;
-        background: #ffffff;
-        border-bottom: 1px solid #e7e7e7;
-        padding: 0 30px;
-        margin-left: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .nav-search {
-        width: 350px;
-    }
-
-    /* CONTENIDO */
-    .main-content {
-        margin-left: 250px;
-        padding: 35px;
-        min-height: calc(100vh - 60px);
-    }
-
-    .card-summary {
-        border-radius: 12px;
-        padding: 25px;
-        border: 1px solid #e7e7e7;
-        background: white;
-        transition: 0.2s;
-    }
-
-        .card-summary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-        }
-
-    .summary-title {
-        font-size: 15px;
-        color: #555;
-    }
-
-    .summary-value {
-        font-size: 28px;
-        font-weight: bold;
-        margin-top: 8px;
-    }
-
-    .summary-change {
-        font-size: 13px;
-        margin-top: 6px;
-    }
-
-    .quick-card {
-        border-radius: 12px;
-        padding: 20px;
-        border: 1px solid #e7e7e7;
-        background: white;
-        transition: .2s;
-        cursor: pointer;
-    }
-
-        .quick-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-        }
-
-    table {
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .status {
-        padding: 6px 12px;
-        border-radius: 25px;
-        font-size: 13px;
-        font-weight: 600;
-        color: white;
-    }
-
-        .status.confirmado {
-            background: #44c767;
-        }
-
-        .status.pendiente {
-            background: #f5a623;
-        }
-
-        .status.cancelado {
-            background: #e94b4b;
-        }
-</style>
-
-<!-- ====== SIDEBAR ====== -->
+<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="title">Agencia Viajes<br><span style="font-size:12px;color:#888;">Panel de Control</span></div>
 
-    <a href="/Dashboard/Index" class="menu-item active">
-        <i class="bi bi-speedometer2"></i> Dashboard
-    </a>
-
-    <a href="/Destinos/Index" class="menu-item">
-        <i class="bi bi-geo-alt"></i> Destinos
-    </a>
-
-    <a href="/Paquetes/Lista" class="menu-item">
-        <i class="bi bi-box-seam"></i> Paquetes Turísticos
-    </a>
-
-    <!-- 🔥 AQUÍ ESTABA EL ERROR: SIN URL → YA LO CORREGÍ -->
-    <a href="/Reserva/Lista" class="menu-item">
-        <i class="bi bi-journal-check"></i> Reservas
-    </a>
-
-    <a href="/Clientes/Lista" class="menu-item">
-        <i class="bi bi-people"></i> Clientes
-    </a>
-
-    <a href="/Configuracion/Index" class="menu-item">
-        <i class="bi bi-gear"></i> Configuración
-    </a>
+    <a href="/Dashboard/Index" class="menu-item active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a href="/Destinos/Index" class="menu-item"><i class="bi bi-geo-alt"></i> Destinos</a>
+    <a href="/Paquetes/Lista" class="menu-item"><i class="bi bi-box-seam"></i> Paquetes Turísticos</a>
+    <a href="/Reserva/Lista" class="menu-item"><i class="bi bi-journal-check"></i> Reservas</a>
+    <a href="/Clientes/Lista" class="menu-item"><i class="bi bi-people"></i> Clientes</a>
+    <a href="/Configuracion/Index" class="menu-item"><i class="bi bi-gear"></i> Configuración</a>
 </div>
 
-<!-- ====== NAVBAR SUPERIOR ====== -->
+<!-- NAVBAR -->
 <div class="navbar-top">
     <input type="text" class="form-control nav-search" placeholder="Buscar cliente, reserva, destino...">
 
@@ -186,74 +27,42 @@
     </div>
 </div>
 
-<!-- ====== CONTENIDO PRINCIPAL ====== -->
+<!-- CONTENIDO -->
 <div class="main-content">
 
     <h2 class="fw-bold">Resumen Ejecutivo</h2>
     <p class="text-muted">Bienvenido, aquí tienes un resumen de la actividad de tu agencia.</p>
 
-    <!-- TARJETAS -->
+    <!-- TARJETAS CON DATOS REALES -->
     <div class="row g-4 mb-4">
         <div class="col-md-3">
             <div class="card-summary">
                 <div class="summary-title">Reservas este mes</div>
-                <div class="summary-value">124</div>
-                <div class="text-success summary-change">↑ +15.2%</div>
+                <div class="summary-value" data-count="@Model.ReservasEsteMes">@Model.ReservasEsteMes</div>
+                <div class="text-success summary-change">Actualizado</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card-summary">
                 <div class="summary-title">Ingresos este mes</div>
-                <div class="summary-value">$85,620</div>
-                <div class="text-success summary-change">↑ +8.5%</div>
+                <div class="summary-value">$@Model.IngresosEsteMes</div>
+                <div class="text-success summary-change">Actualizado</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card-summary">
                 <div class="summary-title">Nuevos Clientes</div>
-                <div class="summary-value">32</div>
-                <div class="text-success summary-change">↑ +21.0%</div>
+                <div class="summary-value">@Model.NuevosClientes</div>
+                <div class="text-success summary-change">Actualizado</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card-summary">
                 <div class="summary-title">Próximas Salidas</div>
-                <div class="summary-value">18</div>
-                <div class="text-danger summary-change">↓ -5.0%</div>
+                <div class="summary-value">@Model.ProximasSalidas</div>
+                <div class="text-danger summary-change">Actualizado</div>
             </div>
         </div>
-    </div>
-
-    <h4 class="fw-bold mt-4">Accesos Rápidos</h4>
-
-    <div class="row g-4 mb-5">
-        <div class="col-md-4">
-            <a href="/Reserva/Crear" class="text-decoration-none">
-                <div class="quick-card">
-                    <h6><i class="bi bi-plus-circle"></i> Crear nueva reserva</h6>
-                    <p class="text-muted">Registra una reserva para un cliente.</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <a href="/Clientes/Crear" class="text-decoration-none">
-                <div class="quick-card">
-                    <h6><i class="bi bi-person-plus"></i> Añadir nuevo Cliente</h6>
-                    <p class="text-muted">Agrega un nuevo perfil de cliente.</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <a asp-controller="Paquete" asp-action="Crear">
-                <div class="quick-card" style="background:#fff5e6;">
-                    <h6><i class="bi bi-briefcase"></i> Crear Paquete Turístico</h6>
-                    <p class="text-muted">Diseña una nueva oferta de viaje.</p>
-                </div>
-            </a>
-        </div>
-
     </div>
 
     <h4 class="fw-bold">Últimas Reservas</h4>
@@ -261,43 +70,33 @@
     <table class="table mt-3">
         <thead class="table-light">
             <tr>
+                <th>ID</th>
                 <th>Cliente</th>
-                <th>Destino</th>
+                <th>Paquete</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Precio</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Ana Pérez</td>
-                <td>Cancún, México</td>
-                <td>2024-08-15</td>
-                <td><span class="status confirmado">Confirmado</span></td>
-            </tr>
-            <tr>
-                <td>Luis García</td>
-                <td>Kioto, Japón</td>
-                <td>2024-09-02</td>
-                <td><span class="status pendiente">Pendiente</span></td>
-            </tr>
-            <tr>
-                <td>Marta Jiménez</td>
-                <td>París, Francia</td>
-                <td>2024-07-28</td>
-                <td><span class="status confirmado">Confirmado</span></td>
-            </tr>
-            <tr>
-                <td>Carlos Rodríguez</td>
-                <td>Roma, Italia</td>
-                <td>2024-10-10</td>
-                <td><span class="status cancelado">Cancelado</span></td>
-            </tr>
+            @foreach (var r in Model.UltimasReservas)
+            {
+                <tr>
+                    <td>@r.IdReserva</td>
+                    <td>@r.Cliente</td>
+                    <td>@r.Paquete</td>
+                    <td>@r.FechaInicio.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <span class="status @r.Estado.ToLower()">@r.Estado</span>
+                    </td>
+                    <td>$@r.Precio</td>
+                </tr>
+            }
         </tbody>
     </table>
 
 </div>
 
-<!-- BOOTSTRAP & ICONS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
